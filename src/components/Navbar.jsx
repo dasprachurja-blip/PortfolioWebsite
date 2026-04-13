@@ -227,13 +227,14 @@ const Navbar = () => {
           }}
         />
         <nav
-          className="relative z-10 flex items-center justify-evenly h-20 px-6 md:px-10 border-b"
+          className="relative z-10 flex items-center justify-center h-20 px-6 md:px-12 border-b"
           style={{
             background: '#0a0a0f',
             borderColor: 'rgba(100,220,180,0.12)',
             fontFamily: FONT,
           }}
         >
+          <div className="w-full max-w-[1440px] flex items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => goTo('/')}
@@ -262,6 +263,7 @@ const Navbar = () => {
             <span style={{ color: '#9ca3af', fontSize: '0.6rem', letterSpacing: '0.1em', lineHeight: 1 }}>menu</span>
             <span style={{ color: TEAL, fontSize: '1rem', lineHeight: 1 }}>]</span>
           </button>
+          </div>
         </nav>
       </div>
 
