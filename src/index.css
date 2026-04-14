@@ -85,3 +85,12 @@ body {
 .marquee-row-reverse:hover {
   animation-play-state: paused;
 }
+
+/* --- Services Section --- */
+.svc-card {
+  opacity: 0;
+}
+
+.svc-card:hover {
+  transform: translateY(-3px) !important;
+}
