@@ -1,0 +1,256 @@
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OBSIDIAN ARCHITECT | Digital Craft</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Space_Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e2e2e2",
+                    "surface-tint": "#ffb59d",
+                    "surface-container-low": "#1b1b1b",
+                    "on-primary-container": "#511500",
+                    "surface-container": "#1f1f1f",
+                    "on-surface": "#e2e2e2",
+                    "on-error": "#690005",
+                    "primary": "#ffb59d",
+                    "surface": "#131313",
+                    "secondary-fixed-dim": "#cfc4c1",
+                    "background": "#131313",
+                    "inverse-primary": "#ab3500",
+                    "on-secondary": "#352f2d",
+                    "on-background": "#e2e2e2",
+                    "on-primary-fixed-variant": "#832700",
+                    "secondary-fixed": "#ece0dc",
+                    "on-tertiary-container": "#36007d",
+                    "error": "#ffb4ab",
+                    "tertiary": "#d2bbff",
+                    "on-primary": "#5d1900",
+                    "on-secondary-container": "#c1b6b3",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed": "#ffdbd0",
+                    "on-tertiary-fixed-variant": "#5a00c6",
+                    "surface-container-highest": "#353535",
+                    "surface-variant": "#353535",
+                    "inverse-on-surface": "#303030",
+                    "on-surface-variant": "#e1bfb5",
+                    "outline": "#a88a81",
+                    "on-tertiary-fixed": "#25005a",
+                    "tertiary-container": "#a476ff",
+                    "surface-dim": "#131313",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary-fixed": "#eaddff",
+                    "primary-fixed-dim": "#ffb59d",
+                    "secondary": "#cfc4c1",
+                    "tertiary-fixed-dim": "#d2bbff",
+                    "outline-variant": "#59413a",
+                    "on-primary-fixed": "#390c00",
+                    "secondary-container": "#4f4845",
+                    "surface-bright": "#393939",
+                    "primary-container": "#f06633",
+                    "on-secondary-fixed-variant": "#4c4543",
+                    "on-secondary-fixed": "#201a18",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#3f008e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            },
+            "animation": {
+              "marquee": "marquee 60s linear infinite",
+              "marquee-reverse": "marquee-reverse 60s linear infinite",
+            },
+            "keyframes": {
+              "marquee": {
+                "0%": { transform: "translateX(0%)" },
+                "100%": { transform: "translateX(-100%)" },
+              },
+              "marquee-reverse": {
+                "0%": { transform: "translateX(-100%)" },
+                "100%": { transform: "translateX(0%)" },
+              }
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e2e2e2; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(20px); background: rgba(53, 53, 53, 0.4); }
+        .hero-text-shadow { text-shadow: 0 0 40px rgba(240, 102, 51, 0.3); }
+        .text-outline { -webkit-text-stroke: 2px rgba(226, 226, 226, 0.15); }
+    </style>
+</head>
+<body class="font-body overflow-x-hidden min-h-screen">
+<main class="py-16 px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto pt-20">
+<!-- Header Section -->
+<header class="max-w-6xl mb-32">
+<span class="font-label text-primary uppercase tracking-[0.4em] text-xs mb-6 block font-bold">Crafting the Future</span>
+<h1 class="font-headline text-6xl md:text-9xl font-[900] tracking-tight leading-[0.9] mb-8">
+                Premium Websites <br/>for <span class="text-primary hero-text-shadow">Bold Brands.</span>
+</h1>
+<p class="font-body text-neutral-200 text-xl md:text-2xl max-w-3xl leading-relaxed font-medium">
+                I design and develop fast, modern, and visually engaging websites with clean UI and smooth animations.
+            </p>
+</header>
+<!-- Structured Bento Grid Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+<!-- Left: Service Grid (Structured Bento) -->
+<div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 01: Frontend Development -->
+<div class="glass-panel p-8 rounded-2xl border border-white/5 hover:bg-surface-container-high transition-all duration-500 group flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-8">
+<div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary transition-transform group-hover:rotate-12">
+<span class="material-symbols-outlined text-3xl">code_blocks</span>
+</div>
+<span class="font-label text-sm text-neutral-600 group-hover:text-primary">01</span>
+</div>
+<h3 class="font-headline text-3xl md:text-4xl font-black mb-4 tracking-tighter leading-tight">Frontend<br/>Development</h3>
+<p class="text-neutral-400 text-base leading-relaxed mb-6">Next-gen interfaces built with architectural precision and fluid interactions.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="font-label text-[10px] bg-white/5 px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">React</span>
+<span class="font-label text-[10px] bg-white/5 px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">Three.js</span>
+</div>
+</div>
+<!-- Card 02: UI/UX Design -->
+<div class="glass-panel p-8 rounded-2xl border border-white/5 hover:bg-surface-container-high transition-all duration-500 group flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-8">
+<div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary transition-transform group-hover:-rotate-12">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+</div>
+<span class="font-label text-sm text-neutral-600 group-hover:text-primary">02</span>
+</div>
+<h3 class="font-headline text-3xl md:text-4xl font-black mb-4 tracking-tighter leading-tight">UI/UX<br/>Design</h3>
+<p class="text-neutral-400 text-base leading-relaxed">Editorial precision meets user-centric flows for intuitive digital experiences.</p>
+</div>
+</div>
+<!-- Card 03: Basic Branding -->
+<div class="glass-panel p-8 rounded-2xl border border-white/5 hover:bg-surface-container-high transition-all duration-500 group md:col-span-2 flex flex-col md:flex-row gap-8 items-start md:items-center">
+<div class="flex-1">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary transition-all group-hover:scale-110">
+<span class="material-symbols-outlined text-3xl">auto_awesome</span>
+</div>
+<span class="font-label text-sm text-neutral-600 group-hover:text-primary">03</span>
+</div>
+<h3 class="font-headline text-3xl md:text-4xl font-black mb-2 tracking-tighter leading-tight">Basic Branding</h3>
+<p class="text-neutral-400 text-base leading-relaxed">Defining visual souls through kinetic typography and identity systems.</p>
+</div>
+<div class="hidden md:block w-px h-24 bg-white/10 mx-4"></div>
+<div class="flex flex-col gap-2 min-w-[140px]">
+<span class="text-primary font-label text-[10px] uppercase tracking-widest">Logo Design</span>
+<span class="text-neutral-500 font-label text-[10px] uppercase tracking-widest">Type Palette</span>
+<span class="text-neutral-500 font-label text-[10px] uppercase tracking-widest">Color Motion</span>
+</div>
+</div>
+<!-- Card 04: Performance Optimization -->
+<div class="glass-panel p-8 rounded-2xl border border-white/5 hover:bg-surface-container-high transition-all duration-500 group md:col-span-2 flex flex-col md:flex-row items-start md:items-center gap-8">
+<div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-on-primary shrink-0">
+<span class="material-symbols-outlined text-3xl">speed</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-headline text-3xl md:text-4xl font-black tracking-tighter leading-tight">Performance Optimization</h3>
+<span class="font-label text-sm text-neutral-600 group-hover:text-primary">04</span>
+</div>
+<p class="text-neutral-400 text-base leading-relaxed max-w-xl">Fine-tuning every millisecond to achieve obsidian-grade stability and speed.</p>
+</div>
+</div>
+</div>
+<!-- Right: Showreel Player -->
+<div class="lg:col-span-5 h-full">
+<div class="group relative h-full min-h-[500px] rounded-3xl overflow-hidden bg-surface-container-lowest shadow-[0_32px_64px_-15px_rgba(0,0,0,0.5)] border border-white/10">
+<div class="absolute inset-0 z-0">
+<img alt="Cinematic Showreel" class="w-full h-full object-cover opacity-80" data-alt="cinematic close-up of high-end computer hardware with glowing orange neon lights and vapor in a dark futuristic studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB01wvj851_SewUMwjdnq2mPvWqQjqkRWnB6V655wIxdy1Z8ls0QSwr5FhFeh-6p77cVJo0jJyaSile1iKlC7v6APOe3PuV50t7lfMzy7cqReamipxu_sUjycFUbj5ONXhqgtZCq1Q84756b5IoAHHteVzUcqqu_AVx_ixOH4q_oBkB1Gkqiw7KSio1iGTKbRyAdIL2WcKhxWRVAkvFFETMdbPeQMTcapJqFq85YEEhwdnFGJ0T3zFimtbqEDQsl5KDg4KwDey7eFUR"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent flex flex-col justify-end p-10">
+<div class="mb-6">
+<span class="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md rounded-full font-label text-[10px] tracking-widest text-primary mb-4 uppercase border border-primary/30">Live Lab</span>
+<h2 class="font-headline font-black text-4xl md:text-5xl leading-tight tracking-tighter">The Obsidian <br/>Showcase 2024</h2>
+</div>
+<div class="flex items-center gap-4 mb-8">
+<div class="flex-1 h-[2px] bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+<span class="font-label text-[10px] text-neutral-400">02:45 / 04:00</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-background bg-neutral-800"></div>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-neutral-700"></div>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-neutral-600 flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<button class="bg-white text-black font-bold px-8 py-4 rounded-full text-sm hover:bg-primary transition-colors tracking-wide">Start Project</button>
+</div>
+</div>
+<div class="absolute top-0 right-0 p-8">
+<div class="w-3 h-3 rounded-full bg-primary animate-ping"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Large Infinite Marquee Footer -->
+<footer class="mt-32 pb-12 overflow-hidden flex flex-col gap-0">
+<!-- First Marquee: Right to Left (Existing) -->
+<div class="flex whitespace-nowrap overflow-hidden py-4 border-y border-white/5">
+<div class="flex animate-marquee items-center gap-16 pr-16">
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">HTML</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">JAVASCRIPT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">CSS</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">REACT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">TAILWIND</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">GIT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">GITHUB</span>
+</div>
+<div aria-hidden="true" class="flex animate-marquee items-center gap-16 pr-16">
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">HTML</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">JAVASCRIPT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">CSS</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">REACT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">TAILWIND</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">GIT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">GITHUB</span>
+</div>
+</div>
+<!-- Second Marquee: Left to Right (New) -->
+<div class="flex whitespace-nowrap overflow-hidden py-4">
+<div class="flex animate-marquee-reverse items-center gap-16 pr-16">
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-primary opacity-80">VS CODE</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">FIGMA</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">NEXT.JS</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">DOCKER</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-primary opacity-80">TYPESCRIPT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">VERCEL</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">NODE</span>
+</div>
+<div aria-hidden="true" class="flex animate-marquee-reverse items-center gap-16 pr-16">
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-primary opacity-80">VS CODE</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">FIGMA</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">NEXT.JS</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">DOCKER</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-primary opacity-80">TYPESCRIPT</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">VERCEL</span>
+<span class="font-headline font-[900] text-7xl md:text-[12rem] tracking-tighter uppercase text-transparent text-outline opacity-20">NODE</span>
+</div>
+</div>
+</footer>
+</body></html>

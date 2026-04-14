@@ -41,3 +41,47 @@ body {
 .typewriter-cursor {
   display: inline-block;
 }
+
+/* --- Glass Panel --- */
+.glass-panel {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* --- Marquee Outline Text --- */
+.marquee-outline {
+  -webkit-text-stroke: 2px rgba(226, 226, 226, 0.15);
+}
+
+/* --- Marquee Animations --- */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-scroll-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.marquee-row {
+  animation: marquee-scroll 60s linear infinite;
+}
+
+.marquee-row-reverse {
+  animation: marquee-scroll-reverse 60s linear infinite;
+}
+
+/* Pause marquee on hover for accessibility */
+.marquee-row:hover,
+.marquee-row-reverse:hover {
+  animation-play-state: paused;
+}
