@@ -72,7 +72,7 @@ const HeroSection1 = () => {
   }, { scope: containerRef });
 
   return (
-    <main ref={containerRef} className="relative min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden bg-brand-dark">
+    <main ref={containerRef} className="relative min-h-screen pt-20 flex flex-col justify-center overflow-hidden bg-brand-dark">
       {/* Background Architectural Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="hero-bg-blob absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-brand-teal/5 blur-[100px]"></div>

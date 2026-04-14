@@ -3,13 +3,15 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { TextPlugin } from 'gsap/TextPlugin';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(TextPlugin, ScrollToPlugin, ScrollTrigger);
 
 // ─── Constants ────────────────────────────────────────────────────
 const NAV_ITEMS = [
   { label: 'work',    prefix: '//',  suffix: null, path: '/work'    },
-  { label: 'about',   prefix: '{',   suffix: '}',  path: '/about'   },
+  { label: 'about',   prefix: '{',   suffix: '}',  path: '#about'   },
   { label: 'contact', prefix: '~',   suffix: null, path: '/contact' },
 ];
 
@@ -51,6 +53,28 @@ const Navbar = () => {
       { x: 20, opacity: 0 },
       { x: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: 'power4.out' },
     '-=0.35');
+
+    // ── Smart Navbar Auto-Hide on Scroll ─────────────────────────────
+    const showAnim = gsap.from(navRef.current, { 
+      yPercent: -100,
+      paused: true,
+      duration: 0.35,
+      ease: "power2.out"
+    }).progress(1);
+
+    ScrollTrigger.create({
+      start: "top top",
+      end: 99999, // Infinite scroll duration
+      onUpdate: (self) => {
+        // Hide when scrolling down past 100px, Show when scrolling up
+        if (self.direction === 1 && window.scrollY > 100) {
+          showAnim.reverse();
+        } else {
+          showAnim.play();
+        }
+      }
+    });
+
   }, { scope: navRef });
 
   // ── Mobile menu open ─────────────────────────────────────────────
@@ -111,17 +135,30 @@ const Navbar = () => {
   };
 
   // ── Navigate and close ───────────────────────────────────────────
-  const goTo = (path) => {
-    if (isOpen) {
-      closeMenu();
-      // small delay so close animation plays before route change
-      setTimeout(() => navigate(path), 450);
+  const executeNav = (path) => {
+    if (path.startsWith('#')) {
+      if (location.pathname !== '/') navigate('/');
+      setTimeout(() => {
+        const id = path.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) gsap.to(window, { scrollTo: { y: el }, duration: 1.2, ease: 'expo.inOut' });
+      }, 50);
     } else {
       navigate(path);
     }
   };
 
-  const active = (path) => location.pathname === path;
+  const goTo = (path) => {
+    if (isOpen) {
+      closeMenu();
+      // small delay so close animation plays before route change
+      setTimeout(() => executeNav(path), 450);
+    } else {
+      executeNav(path);
+    }
+  };
+
+  const active = (path) => location.pathname === path || location.hash === path;
 
   // ── Desktop link hover ───────────────────────────────────────────
   const onEnter = (e) => {
@@ -218,7 +255,7 @@ const Navbar = () => {
   return (
     <>
       {/* ── DESKTOP / MOBILE NAV BAR ─────────────────────────── */}
-      <div ref={navRef} className="relative w-full z-50">
+      <div ref={navRef} className="fixed top-0 left-0 w-full z-50">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{

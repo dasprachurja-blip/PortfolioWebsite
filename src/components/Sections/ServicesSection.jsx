@@ -1,13 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import heroVideo from '../../assets/hero-2.mp4';
+import heroPoster from '../../assets/hero.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SHOWCASE_IMG =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuB01wvj851_SewUMwjdnq2mPvWqQjqkRWnB6V655wIxdy1Z8ls0QSwr5FhFeh-6p77cVJo0jJyaSile1iKlC7v6APOe3PuV50t7lfMzy7cqReamipxu_sUjycFUbj5ONXhqgtZCq1Q84756b5IoAHHteVzUcqqu_AVx_ixOH4q_oBkB1Gkqiw7KSio1iGTKbRyAdIL2WcKhxWRVAkvFFETMdbPeQMTcapJqFq85YEEhwdnFGJ0T3zFimtbqEDQsl5KDg4KwDey7eFUR';
-
+/* ─── Data ───────────────────────────────────────────────────── */
 const SERVICES = [
   {
     num: '01',
@@ -42,216 +42,315 @@ const SERVICES = [
 
 /* ─── Service Card ────────────────────────────────────────────── */
 const ServiceCard = ({ num, icon, title, desc, tags, extras }) => (
-  <div className="svc-card group relative overflow-hidden rounded-2xl border border-white/[0.06] p-8 md:p-10 lg:p-12 transition-all duration-500 hover:border-brand-teal/25 hover:bg-white/[0.03] flex flex-col justify-between backdrop-blur-sm bg-white/[0.015]">
-    {/* Hover glow */}
+  <div className="svc-card group relative overflow-hidden rounded-2xl border border-white/[0.06] p-6 md:p-8 transition-all duration-500 hover:border-brand-teal/25 hover:bg-white/[0.03] flex flex-col justify-between backdrop-blur-sm bg-white/[0.015]">
     <div
       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
       style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(100,220,180,0.05) 0%, transparent 70%)' }}
     />
-
     <div className="relative z-10">
-      <div className="flex justify-between items-start mb-8 md:mb-10">
-        <div className="w-14 h-14 md:w-16 md:h-16 bg-brand-teal/10 rounded-xl flex items-center justify-center text-brand-teal text-xl md:text-2xl transition-transform duration-500 group-hover:scale-110">
+      <div className="flex justify-between items-start mb-5 md:mb-6">
+        <div className="svc-icon w-14 h-14 md:w-16 md:h-16 bg-brand-teal/10 rounded-xl flex items-center justify-center text-brand-teal text-xl md:text-2xl transition-all duration-500 group-hover:scale-110">
           {icon}
         </div>
-        <span className="font-mono text-xs text-gray-600 group-hover:text-brand-teal/70 transition-colors duration-300 bg-white/[0.03] px-3 py-1.5 rounded-full border border-white/[0.06]">
+        <span className="svc-num font-mono text-xs text-gray-600 group-hover:text-brand-teal/70 transition-colors duration-300 bg-white/[0.03] px-3 py-1.5 rounded-full border border-white/[0.06]">
           {num}
         </span>
       </div>
-
-      <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tighter leading-[1.05] mb-4 text-white">
-        {title.map((line, i) => (
-          <span key={i}>
-            {line}
-            {i < title.length - 1 && <br />}
-          </span>
-        ))}
-      </h3>
-
-      <p className="text-gray-400 text-sm md:text-base leading-relaxed">{desc}</p>
+      <div className="svc-content relative z-10">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tighter leading-[1.05] mb-4 text-white">
+          {title.map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < title.length - 1 && <br />}
+            </span>
+          ))}
+        </h3>
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed">{desc}</p>
+      </div>
     </div>
-
     {extras && (
       <div className="flex flex-wrap gap-x-5 gap-y-2 mt-8 relative z-10">
         {tags.map((tag, i) => (
-          <span key={tag} className={`font-mono text-[10px] uppercase tracking-[0.2em] ${i === 0 ? 'text-brand-teal' : 'text-gray-500'}`}>
+          <span key={tag} className={`svc-tag font-mono text-[10px] uppercase tracking-[0.2em] ${i === 0 ? 'text-brand-teal' : 'text-gray-500'}`}>
             {tag}
           </span>
         ))}
       </div>
     )}
-
     {!extras && tags.length > 0 && (
       <div className="flex flex-wrap gap-2.5 mt-8 relative z-10">
         {tags.map((tag) => (
-          <span key={tag} className="font-mono text-[10px] bg-white/[0.04] px-3.5 py-1.5 rounded-full border border-white/[0.06] uppercase tracking-[0.15em] text-gray-400">
+          <span key={tag} className="svc-tag font-mono text-[10px] bg-white/[0.04] px-3.5 py-1.5 rounded-full border border-white/[0.06] uppercase tracking-[0.15em] text-gray-400">
             {tag}
           </span>
         ))}
       </div>
     )}
-  </div>
-);
-
-/* ─── Showcase Panel ─────────────────────────────────────────── */
-const ShowcasePanel = () => (
-  <div className="svc-showcase group relative w-full h-full min-h-[450px] md:min-h-[550px] lg:min-h-[600px] rounded-2xl md:rounded-3xl overflow-hidden border border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]">
-    <div className="absolute inset-0 z-0 overflow-hidden">
-      <img
-        alt="Cinematic Showreel"
-        className="svc-showcase-img w-full h-[120%] object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-        src={SHOWCASE_IMG}
-        loading="lazy"
-      />
-    </div>
-    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/30 to-transparent z-[1]" />
-    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-14 z-[2]">
-      <div className="mb-6 md:mb-8">
-        <span className="inline-block px-4 py-1.5 bg-brand-teal/15 backdrop-blur-md rounded-full font-mono text-[10px] tracking-[0.2em] text-brand-teal mb-4 md:mb-5 uppercase border border-brand-teal/25">
-          Live Lab
-        </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tighter text-white">
-          The Obsidian <br />Showcase 2024
-        </h2>
-      </div>
-      <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-10">
-        <div className="flex-1 h-[2px] bg-white/10 rounded-full overflow-hidden">
-          <div className="svc-progress h-full bg-gradient-to-r from-brand-violet to-brand-teal rounded-full" style={{ width: '66%' }} />
-        </div>
-        <span className="font-mono text-[10px] text-gray-500">02:45 / 04:00</span>
-      </div>
-      <div className="flex justify-between items-center">
-        <div className="flex -space-x-3">
-          <div className="w-10 h-10 md:w-11 md:h-11 rounded-full border-2 border-brand-dark bg-gray-800" />
-          <div className="w-10 h-10 md:w-11 md:h-11 rounded-full border-2 border-brand-dark bg-gray-700" />
-          <div className="w-10 h-10 md:w-11 md:h-11 rounded-full border-2 border-brand-dark bg-gray-600 flex items-center justify-center text-[10px] font-bold text-white">+12</div>
-        </div>
-        <button className="group/btn relative overflow-hidden bg-white text-brand-dark font-bold px-8 py-4 md:px-10 md:py-5 rounded-full text-sm tracking-wide cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(100,220,180,0.5)]">
-          <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-brand-teal/20 to-transparent pointer-events-none" />
-          <span className="relative z-10">Start Project</span>
-        </button>
-      </div>
-    </div>
-    <div className="absolute top-6 right-6 md:top-8 md:right-8 z-[2]">
-      <div className="relative">
-        <div className="w-3 h-3 rounded-full bg-brand-teal animate-ping absolute inset-0" />
-        <div className="w-3 h-3 rounded-full bg-brand-teal relative" />
-      </div>
-    </div>
   </div>
 );
 
 /* ═══════════════════════════════════════════════════════════════
-   MAIN SECTION — Two cinematic full-screen pages
+   CINEMATIC VIDEO HERO + SERVICES — Two full-screen pages
    ═══════════════════════════════════════════════════════════════ */
 const ServicesSection = () => {
   const sectionRef = useRef();
+  const videoRef = useRef(null);
+  const heroRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const hasStartedPlaying = useRef(false);
 
+  /* ── Detect mobile ── */
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  /* ── Start video playback on scroll (desktop only) ── */
+  const startVideoOnScroll = useCallback(() => {
+    if (hasStartedPlaying.current || isMobile) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    hasStartedPlaying.current = true;
+    video.play().catch(() => {});
+
+    // Remove scroll listener once triggered
+    window.removeEventListener('scroll', startVideoOnScroll);
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile) return;
+    window.addEventListener('scroll', startVideoOnScroll, { passive: true });
+    return () => window.removeEventListener('scroll', startVideoOnScroll);
+  }, [startVideoOnScroll, isMobile]);
+
+  /* ── GSAP scroll animations ── */
   useGSAP(() => {
     const el = sectionRef.current;
     if (!el) return;
 
-    /* ── Page 1: Showcase fades up on scroll ── */
+    /* — Video cinematic reveal on scroll — */
+    if (!isMobile) {
+      gsap.to('.hero-video-layer', {
+        filter: 'blur(0px) brightness(0.55)',
+        scale: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '80% top',
+          scrub: 1.5,
+        },
+      });
+    }
+
+    /* — Text parallax — */
+    gsap.to('.hero-text-content', {
+      y: -80,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    });
+
+    /* — Heading fade-in + slide-up — */
     gsap.fromTo(
-      '.page1-showcase',
-      { opacity: 0, y: 60 },
+      '.hero-heading-anim',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.4,
+        ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        delay: 0.3,
+      }
+    );
+
+    /* — Subtext staggered entrance — */
+    gsap.fromTo(
+      '.hero-subtext-anim',
+      { opacity: 0, y: 25 },
       {
         opacity: 1,
         y: 0,
         duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.page1-showcase',
-          start: 'top 85%',
-          end: 'top 50%',
-          toggleActions: 'play none none reverse',
-        },
+        ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        delay: 0.7,
       }
     );
 
-    /* ── Page 2: Cards stagger in ── */
-    const cards = el.querySelectorAll('.svc-card');
+    /* — Label entrance — */
     gsap.fromTo(
-      cards,
-      { opacity: 0, y: 50 },
+      '.hero-label-anim',
+      { opacity: 0, y: 15 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.9,
-        stagger: 0.15,
+        duration: 1,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.page2-cards',
-          start: 'top 80%',
-          end: 'top 40%',
-          toggleActions: 'play none none reverse',
-        },
+        delay: 0.1,
       }
     );
 
-    /* ── Subtle parallax on showcase image ── */
-    gsap.to('.svc-showcase-img', {
-      yPercent: -10,
-      ease: 'none',
+    /* ══ Page 2: PINNED scroll-driven reveal ══ */
+    const page2 = el.querySelector('.page2-section');
+    const cards = el.querySelectorAll('.svc-card');
+
+    const masterTL = gsap.timeline({
       scrollTrigger: {
-        trigger: '.page1-showcase',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1.2,
+        trigger: page2,
+        start: 'top 80%', // Triggers normally when the section comes into view
+        toggleActions: 'play none none none', // Play once, never reverse
       },
     });
 
-  }, { scope: sectionRef });
+    // 1) Header snaps in
+    masterTL.fromTo('.page2-header',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+    );
+
+    // 2) All cards burst in quickly
+    cards.forEach((card, i) => {
+      const offset = 0.3 + i * 0.15;
+
+      // Card entrance
+      masterTL.fromTo(card,
+        { opacity: 0, y: 60, scale: 0.93 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power3.out' },
+        offset
+      );
+
+      // Icon pop
+      masterTL.fromTo(card.querySelector('.svc-icon'),
+        { scale: 0.5, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.15, ease: 'back.out(2)' },
+        offset + 0.1
+      );
+    });
+
+  }, { scope: sectionRef, dependencies: [isMobile] });
 
   return (
-    <div ref={sectionRef} className="relative bg-brand-dark">
+    <div id="about" ref={sectionRef} className="relative bg-brand-dark">
 
       {/* ═══════════════════════════════════════════════════════
-           PAGE 1 — Hero Text + Showcase
+           PAGE 1 — Cinematic Video Hero
            ═══════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 md:px-12 py-32 md:py-40 lg:py-48">
-        {/* Background accents */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-brand-teal/10 to-transparent" />
-          <div className="absolute top-[15%] right-[-10%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full bg-brand-violet/[0.03] blur-[140px]" />
-          <div className="absolute bottom-[15%] left-[-8%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full bg-brand-teal/[0.03] blur-[120px]" />
+      <section
+        ref={heroRef}
+        className="relative w-full h-screen overflow-hidden"
+      >
+        {/* ── Video / Image Background ── */}
+        <div className="absolute inset-0 z-0">
+          {/* Desktop: Video */}
+          {!isMobile && (
+            <video
+              ref={videoRef}
+              className="hero-video-layer absolute inset-0 w-full h-full object-cover"
+              src={heroVideo}
+              poster={heroPoster}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onCanPlayThrough={() => setVideoReady(true)}
+              style={{
+                filter: 'blur(6px) brightness(0.35)',
+                transform: 'scale(1.12)',
+                transition: 'opacity 0.8s ease',
+                opacity: videoReady ? 1 : 0,
+              }}
+            />
+          )}
+
+          {/* Static poster fallback (always present, visible on mobile or before video loads) */}
+          <img
+            src={heroPoster}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              filter: 'brightness(0.3)',
+              opacity: (isMobile || !videoReady) ? 1 : 0,
+              transition: 'opacity 1.2s ease',
+            }}
+          />
         </div>
 
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto flex flex-col items-center">
-          {/* Header — centered, no animation */}
-          <div className="flex flex-col items-center text-center mb-20 md:mb-28 lg:mb-36">
-            <span className="block font-mono text-brand-teal uppercase tracking-[0.4em] text-[10px] md:text-xs mb-6 md:mb-8 font-bold">
+        {/* ── Dark Gradient Overlay ── */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background: `
+              linear-gradient(to top, #0a0a0f 0%, rgba(10,10,15,0.7) 35%, rgba(10,10,15,0.3) 60%, rgba(10,10,15,0.5) 100%),
+              radial-gradient(ellipse at center, transparent 50%, rgba(10,10,15,0.6) 100%)
+            `,
+          }}
+        />
+
+        {/* ── Grain Texture (subtle) ── */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none opacity-[0.04]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '128px 128px',
+          }}
+        />
+
+        {/* ── Text Content ── */}
+        <div className="hero-text-content absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-12">
+          <div className="w-full max-w-7xl mx-auto flex flex-col items-center text-center">
+            {/* Label */}
+            <span className="hero-label-anim block font-mono text-brand-teal uppercase tracking-[0.4em] text-[10px] md:text-xs mb-4 md:mb-6 font-bold opacity-0">
               Crafting the Future
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tighter leading-[0.92] mb-8 md:mb-10 text-white">
-              Premium Websites{' '}
-              <br className="hidden sm:block" />
-              for{' '}
-              <span className="text-brand-teal" style={{ textShadow: '0 0 40px rgba(100,220,180,0.3)' }}>
-                Bold Brands.
+
+            {/* Main Heading — exactly 2 lines */}
+            <h2 className="hero-heading-anim font-extrabold tracking-tighter leading-[0.92] mb-5 md:mb-6 text-white opacity-0" style={{ fontSize: 'clamp(2.2rem, 8vw, 8rem)' }}>
+              <span className="block whitespace-nowrap">Premium Websites</span>
+              <span className="block whitespace-nowrap">
+                for{' '}
+                <span
+                  className="text-brand-teal"
+                  style={{ textShadow: '0 0 60px rgba(100,220,180,0.25)' }}
+                >
+                  Bold Brands.
+                </span>
               </span>
             </h2>
-            <p className="text-gray-400 text-base md:text-xl max-w-2xl leading-relaxed font-medium">
-              I design and develop fast, modern, and visually engaging websites with clean UI and smooth animations.
+
+            {/* Subtitle */}
+            <p className="hero-subtext-anim text-gray-400/90 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium opacity-0">
+              I design and develop fast, modern, and visually engaging websites
+              with clean UI and smooth animations.
             </p>
           </div>
-
-          {/* Showcase Panel — full width for cinematic impact */}
-          <div className="page1-showcase w-full max-w-[1100px] opacity-0">
-            <ShowcasePanel />
-          </div>
         </div>
+
+        {/* ── Bottom Fade to Dark ── */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-48 z-[3] pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, #0a0a0f 0%, transparent 100%)',
+          }}
+        />
       </section>
 
-      {/* Divider — breathing space between pages */}
-      <div className="w-full flex justify-center py-8 md:py-12">
-        <div className="w-px h-24 md:h-36 bg-gradient-to-b from-brand-teal/20 via-brand-teal/5 to-transparent" />
+      {/* ── Breathing Divider ── */}
+      <div className="w-full flex justify-center py-6 md:py-10">
+        <div className="w-px h-16 md:h-24 bg-gradient-to-b from-brand-teal/15 via-brand-teal/5 to-transparent" />
       </div>
 
       {/* ═══════════════════════════════════════════════════════
            PAGE 2 — Service Cards
            ═══════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 md:px-12 py-32 md:py-40 lg:py-48">
+      <section className="page2-section relative w-full h-screen flex flex-col items-center justify-start px-6 md:px-12 pt-12 md:pt-16 overflow-hidden">
         {/* Background accents */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[20%] left-[-6%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full bg-brand-violet/[0.03] blur-[130px]" />
@@ -260,8 +359,8 @@ const ServicesSection = () => {
 
         <div className="relative z-10 w-full max-w-[1440px] mx-auto flex flex-col items-center">
           {/* Section Label */}
-          <div className="flex flex-col items-center text-center mb-16 md:mb-24 lg:mb-32">
-            <span className="block font-mono text-brand-teal uppercase tracking-[0.4em] text-[10px] md:text-xs mb-5 md:mb-6 font-bold">
+          <div className="page2-header flex flex-col items-center text-center mb-6 md:mb-8">
+            <span className="block font-mono text-brand-teal uppercase tracking-[0.4em] text-[10px] md:text-xs mb-3 md:mb-4 font-bold">
               What I Do
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] text-white">
@@ -273,7 +372,7 @@ const ServicesSection = () => {
           </div>
 
           {/* Cards — 2×2 grid */}
-          <div className="page2-cards w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
+          <div className="page2-cards w-full max-w-[1200px] grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             {SERVICES.map((s) => (
               <ServiceCard key={s.num} {...s} />
             ))}
