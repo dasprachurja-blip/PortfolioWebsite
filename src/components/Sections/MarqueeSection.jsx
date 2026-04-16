@@ -5,8 +5,8 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ROW_1 = ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'GSAP', 'Vite', 'Three.js'];
-const ROW_2 = ['C++', 'React.js', 'HTML5', 'JavaScript', 'CSS3', 'Three.js', 'GSAP'];
+const ROW_1 = ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'GSAP', 'Vite', 'Three.js','GIT'];
+const ROW_2 = ['C++', 'React.js', 'HTML5', 'JavaScript', 'CSS3', 'Three.js', 'GSAP','GIT'];
 
 /* ─── Single Marquee Row (GSAP-powered) ─────────────────────── */
 const MarqueeRow = ({ items, reverse = false, colorType = 'teal' }) => {

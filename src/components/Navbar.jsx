@@ -10,7 +10,7 @@ gsap.registerPlugin(TextPlugin, ScrollToPlugin, ScrollTrigger);
 
 // ─── Constants ────────────────────────────────────────────────────
 const NAV_ITEMS = [
-  { label: 'work',    prefix: '//',  suffix: null, path: '/work'    },
+  { label: 'work',    prefix: '//',  suffix: null, path: '#work'   },
   { label: 'about',   prefix: '{',   suffix: '}',  path: '#about'   },
   { label: 'contact', prefix: '~',   suffix: null, path: '/contact' },
 ];

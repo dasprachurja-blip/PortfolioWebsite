@@ -143,3 +143,29 @@ body {
 .svc-card:hover .svc-icon {
   box-shadow: 0 0 25px -5px rgba(100, 220, 180, 0.3);
 }
+
+/* --- Project Showcase --- */
+.project-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .project-card-grid {
+    grid-template-columns: 1fr 1.1fr;
+  }
+}
+
+.project-card-copy {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .project-card-copy {
+    padding: 48px 44px;
+  }
+}

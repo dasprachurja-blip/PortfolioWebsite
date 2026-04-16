@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import HeroSection1 from './components/Hero/HeroSection1';
 import ServicesSection from './components/Sections/ServicesSection';
 import MarqueeSection from './components/Sections/MarqueeSection';
+import MarinLabsHero from './components/Sections/MarinLabsHero';
+import OverlapShowcase from './components/Sections/OverlapShowcase';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -16,6 +18,8 @@ const App = () => {
       <HeroSection1 />
       <ServicesSection />
       <MarqueeSection />
+      <MarinLabsHero />
+      <OverlapShowcase />
     </div>
   )
 }

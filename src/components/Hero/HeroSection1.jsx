@@ -1,12 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import profileImg from '../../assets/profile.jpg';
 import Signature from '../Signature';
 import NeonText from '../NeonText';
 import PrimaryButton from '../ui/PrimaryButton';
 import SecondaryButton from '../ui/SecondaryButton';
 import TypewriterText from '../ui/TypewriterText';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const HeroSection1 = () => {
   const containerRef = useRef();
@@ -103,7 +106,13 @@ const HeroSection1 = () => {
           </div>
 
           <div className="flex flex-row gap-3 md:gap-6 items-center pt-2 md:pt-6 w-full">
-            <PrimaryButton className="hero-btn opacity-0 flex-1 md:flex-none justify-center px-4 py-4 md:px-10 text-sm md:text-lg">
+            <PrimaryButton
+              className="hero-btn opacity-0 flex-1 md:flex-none justify-center px-4 py-4 md:px-10 text-sm md:text-lg"
+              onClick={() => {
+                const el = document.getElementById('work');
+                if (el) gsap.to(window, { scrollTo: { y: el, offsetY: 0 }, duration: 1.2, ease: 'expo.inOut' });
+              }}
+            >
               View My Work
             </PrimaryButton>
             <SecondaryButton className="hero-btn opacity-0 flex-1 md:flex-none justify-center px-4 py-4 md:px-10 text-sm md:text-lg text-center" icon="→">
