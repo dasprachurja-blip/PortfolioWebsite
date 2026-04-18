@@ -12,7 +12,7 @@ gsap.registerPlugin(TextPlugin, ScrollToPlugin, ScrollTrigger);
 const NAV_ITEMS = [
   { label: 'work',    prefix: '//',  suffix: null, path: '#work'   },
   { label: 'about',   prefix: '{',   suffix: '}',  path: '#about'   },
-  { label: 'contact', prefix: '~',   suffix: null, path: '/contact' },
+  { label: 'contact', prefix: '~',   suffix: null, path: '#contact' },
 ];
 
 const FONT = "'JetBrains Mono','Fira Code',monospace";

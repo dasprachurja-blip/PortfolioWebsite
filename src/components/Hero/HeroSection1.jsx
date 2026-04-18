@@ -115,7 +115,14 @@ const HeroSection1 = () => {
             >
               View My Work
             </PrimaryButton>
-            <SecondaryButton className="hero-btn opacity-0 flex-1 md:flex-none justify-center px-4 py-4 md:px-10 text-sm md:text-lg text-center" icon="→">
+            <SecondaryButton 
+              className="hero-btn opacity-0 flex-1 md:flex-none justify-center px-4 py-4 md:px-10 text-sm md:text-lg text-center" 
+              icon="→"
+              onClick={() => {
+                const el = document.getElementById('contact');
+                if (el) gsap.to(window, { scrollTo: { y: el, offsetY: 0 }, duration: 1.2, ease: 'expo.inOut' });
+              }}
+            >
               Let's Talk
             </SecondaryButton>
           </div>
