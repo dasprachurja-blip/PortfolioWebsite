@@ -9,21 +9,30 @@ import MarqueeSection from './components/Sections/MarqueeSection';
 import MarinLabsHero from './components/Sections/MarinLabsHero';
 import OverlapShowcase from './components/Sections/OverlapShowcase';
 import ContactSection from './components/Sections/ContactSection';
+import Footer from './components/Sections/Footer';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const App = () => {
   return (
     <div className="bg-brand-dark min-h-screen text-white">
-      <Navbar />
-      <HeroSection1 />
-      <ServicesSection />
-      <MarqueeSection />
-      <div className="relative">
-        <MarinLabsHero />
-        <OverlapShowcase />
+      <div className="relative z-10 bg-[#050505] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <Navbar />
+        <div id="home">
+          <HeroSection1 />
+        </div>
+        <ServicesSection />
+        <MarqueeSection />
+        <div className="relative">
+          <MarinLabsHero />
+          <OverlapShowcase />
+        </div>
+        <ContactSection />
       </div>
-      <ContactSection />
+
+      <div className="relative z-0">
+        <Footer />
+      </div>
     </div>
   )
 }

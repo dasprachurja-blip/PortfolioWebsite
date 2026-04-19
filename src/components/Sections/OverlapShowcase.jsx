@@ -48,6 +48,23 @@ const OverlapShowcase = () => {
       },
     });
 
+    // Slide up text animation
+    gsap.fromTo('.overlap-hero-text', 
+      { y: 60, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1.2, 
+        stagger: 0.15, 
+        ease: 'expo.out',
+        scrollTrigger: {
+          trigger: '.overlap-hero',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+
     // Animate cards on scroll for a subtle scale-down effect 
     // when they get stacked behind the next card.
     const cards = gsap.utils.toArray('.overlap-card');
@@ -70,7 +87,7 @@ const OverlapShowcase = () => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative z-20 bg-black w-full text-white rounded-t-3xl md:rounded-t-[40px]">
+    <div id="work" ref={containerRef} className="relative z-20 bg-black w-full text-white rounded-t-3xl md:rounded-t-[40px]">
       {/* ── SECTION 1 (HERO) ── */}
       <section className="overlap-hero relative w-full min-h-[65vh] pt-24 pb-32 flex flex-col items-center justify-center overflow-hidden">
         {/* Parallax Background Gradient */}
@@ -83,11 +100,11 @@ const OverlapShowcase = () => {
         
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center text-center px-6 -mt-[50px]">
-          <h1 className="font-['Syne'] text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6">
+          <h1 className="overlap-hero-text opacity-0 font-['Syne'] text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6">
             Crafting Modern<br />
             <span className="text-brand-teal">Web Experiences</span>
           </h1>
-          <p className="font-['DM_Sans'] text-lg md:text-xl text-brand-dim max-w-xl font-light">
+          <p className="overlap-hero-text opacity-0 font-['DM_Sans'] text-lg md:text-xl text-brand-dim max-w-xl font-light">
             Fast, scalable, and visually refined web solutions.
           </p>
         </div>

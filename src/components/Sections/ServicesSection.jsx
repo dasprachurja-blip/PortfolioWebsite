@@ -350,7 +350,7 @@ const ServicesSection = () => {
       {/* ═══════════════════════════════════════════════════════
            PAGE 2 — Service Cards
            ═══════════════════════════════════════════════════════ */}
-      <section className="page2-section relative w-full h-screen flex flex-col items-center justify-start px-6 md:px-12 pt-12 md:pt-16 overflow-hidden">
+      <section id="services" className="page2-section relative w-full h-screen flex flex-col items-center justify-start px-6 md:px-12 pt-12 md:pt-16 overflow-hidden">
         {/* Background accents */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[20%] left-[-6%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full bg-brand-violet/[0.03] blur-[130px]" />
